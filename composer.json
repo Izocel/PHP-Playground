@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "name": "izocel/playground",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src",
+      "App\\ImagickPlaygroud\\": "src/ImagickPlayground"
+    }
+  },
+  "require": {}
+}
