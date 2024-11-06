@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\EzmaxPlayground\EzmaxPlayground;
 use App\ImagickPlaygroud\ImagickPlaygroud;
 
 class App

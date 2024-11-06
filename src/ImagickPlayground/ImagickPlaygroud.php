@@ -6,9 +6,9 @@ class ImagickPlaygroud
 {
     public function __construct()
     {
-        $imageHelper = new ImagickHelper(__DIR__ . "../../assets/TestCoupons/1a2d.jpg");
-        $imageHelper->convertTo('png');
-        echo $imageHelper->autoRotateImage();
-        echo $imageHelper->display();
+        $outputPath = __DIR__ . "../../assets/";
+        $filePath = $outputPath . "pdfToutNoir.pdf";
+        $imagickHelper = new ImagickHelper($filePath);
+        $imagickHelper->convertPdfToImages($filePath, $outputPath, 'jpeg', 150);
     }
 }

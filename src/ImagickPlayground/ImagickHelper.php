@@ -38,6 +38,17 @@ class ImagickHelper
         return $this->image->getImageOrientation();
     }
 
+    public function convertPdfToImages($pdfPath, $outputPath, $format = 'jpeg', $dpi = 150)
+    {
+        $pages = $this->image->getNumberImages();
+        for ($i = 0; $i < $pages; $i++) {
+            $this->image->readImage($pdfPath . "[" . $i . "]");
+            $this->image->setImageFormat($format);
+            $this->image->setImageResolution($dpi, $dpi);
+            $this->image->writeImage($outputPath . "page-" . str_pad($i + 1, 3, '0', STR_PAD_LEFT) . "." . $format);
+        }
+    }
+
     public function autoRotateImage()
     {
         switch ($this->getOrientation()) {
