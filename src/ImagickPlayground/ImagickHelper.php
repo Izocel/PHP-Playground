@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ImagickPlaygroud;
+namespace App\ImagickPlayground;
 
 use Imagick;
 use ImagickException;

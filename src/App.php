@@ -3,12 +3,13 @@
 namespace App;
 
 use App\EzmaxPlayground\EzmaxPlayground;
-use App\ImagickPlaygroud\ImagickPlaygroud;
+use App\ImagickPlayground\ImagickPlayground;
+use App\CSVPlayground\CSVPlayground;
 
 class App
 {
     public function __construct()
     {
-        new ImagickPlaygroud;
+        new CSVPlayground;
     }
 }

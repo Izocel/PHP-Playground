@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ImagickPlaygroud;
+namespace App\ImagickPlayground;
 
-class ImagickPlaygroud
+class ImagickPlayground
 {
     public function __construct()
     {
