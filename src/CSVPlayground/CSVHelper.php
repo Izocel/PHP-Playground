@@ -8,21 +8,44 @@ use League\Csv\Statement;
 
 
 /**
+ * Class CSVHelper
+ *
+ * A utility class for parsing CSV files using the League\Csv library.
+ * It reads a CSV file, detects and converts its encoding to UTF-8 if necessary,
+ * and processes the CSV data into an array format. The class supports custom
+ * delimiter, enclosure, and escape characters. It also handles exceptions
+ * during the parsing process and outputs the parsed data in JSON format.
+ *
  * @link https://csv.thephpleague.com/
  */
 class CSVHelper
 {
     private $filePath;
+    private $delimiter;
+    private $enclosure;
+    private $escape;
     private $data;
 
-    public function __construct($filePath)
+    public function __construct(string $filePath, string $delimiter = ";", string $escape = "\\", string $enclosure = '"')
     {
         $this->filePath = $filePath;
+        $this->delimiter = $delimiter;
+        $this->enclosure = $enclosure;
+        $this->escape = $escape;
+
         $this->parseCsvFile();
-        $this->print();
+        print_r($this->toJson());
     }
 
-    private function parseCsvFile(string $delimiter = ";", string $escape = "\\", string $enclosure = '"'): void
+    /**
+     * Parses the CSV file specified by the filePath property.
+     * Detects the file's encoding and converts it to UTF-8 if necessary.
+     * Loads the CSV content using the League\Csv library with specified delimiter, enclosure, and escape characters.
+     * Converts the CSV records into an array and stores it in the data property.
+     * Cleans up the temporary file used during processing.
+     * Catches and displays any exceptions that occur during parsing.
+     */
+    private function parseCsvFile(): void
     {
         try {
             // Detect the file's encoding
@@ -39,9 +62,9 @@ class CSVHelper
 
             // Load the converted content into League\Csv
             $csv = Reader::createFromPath($tmpFilename, 'r');
-            $csv->setEscape($escape);
-            $csv->setEnclosure($enclosure);
-            $csv->setDelimiter($delimiter);
+            $csv->setDelimiter($this->delimiter);
+            $csv->setEnclosure($this->enclosure);
+            $csv->setEscape($this->escape);
 
             // If the CSV file has a header at row [0]
             // $fileContent->setHeaderOffset(0);
@@ -64,11 +87,14 @@ class CSVHelper
         }
     }
 
+
     /**
-     * Prints the parsed CSV data stored in the data property.
+     * Converts the parsed CSV data stored in the data property to a JSON string.
+     *
+     * @return string JSON representation of the CSV data.
      */
-    private function print()
+    private function toJson()
     {
-        print_r(json_encode($this->data));
+        return json_encode($this->data);
     }
 }
