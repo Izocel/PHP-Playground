@@ -56,6 +56,9 @@ class CSVHelper
                 $fileContent = mb_convert_encoding($fileContent, 'UTF-8', $encoding);
             }
 
+            // Remove BOM if present
+            $fileContent = preg_replace('/^\xEF\xBB\xBF/', '', $fileContent);
+
             // Transcode the file into a temp file
             $tmpFilename = 'temp_file.csv';
             file_put_contents($tmpFilename, $fileContent);
